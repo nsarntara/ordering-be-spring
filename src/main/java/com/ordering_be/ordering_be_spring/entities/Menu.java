@@ -17,7 +17,7 @@ public class Menu {
     private long id ;
     @NonNull
     private String name;
-
+    @NonNull
     private String description;
     @NonNull
 

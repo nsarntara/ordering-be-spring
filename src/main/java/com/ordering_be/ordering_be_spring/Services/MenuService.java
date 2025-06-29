@@ -21,12 +21,13 @@ public class MenuService {
     }
 
     public List<Menu> getAll() {
+
         return menuRepository.findAll();
     }
 
     @Transactional
-    public Menu add(String name, float price) {
-        Menu menu = menuRepository.saveAndFlush(new Menu(name, price));
+    public Menu add(String name, String description , float price) {
+        Menu menu = menuRepository.saveAndFlush(new Menu(name,description, price));
 
         return menu;
 

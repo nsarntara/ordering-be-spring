@@ -1,5 +1,6 @@
 package com.ordering_be.ordering_be_spring.Controllers;
 
+import com.ordering_be.ordering_be_spring.Models.NewMenuRequest;
 import com.ordering_be.ordering_be_spring.Services.MenuService;
 import com.ordering_be.ordering_be_spring.entities.Menu;
 
@@ -29,14 +30,14 @@ public class MenuController {
 
     @GetMapping("/menu/{id}")
     public Menu getById(@PathVariable long id) {
-        log.info("eve555{}", id);
+        log.info("get{}", id);
         Menu menu = menuService.getById(id).orElseThrow(() -> new ErrorResponseException(HttpStatus.NOT_FOUND, new Error("gg not found")));
         return menu;
     }
 
     @PostMapping("/menu")
-    public Menu Add() {
+    public Menu Add ( @RequestBody NewMenuRequest newMenu ) {
 
-        return menuService.add("eve", 100);
+        return menuService.add(newMenu.name, newMenu.description ,newMenu.price );
     }
 }
