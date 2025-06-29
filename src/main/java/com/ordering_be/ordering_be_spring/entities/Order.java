@@ -2,6 +2,7 @@ package com.ordering_be.ordering_be_spring.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -14,4 +15,6 @@ public class Order {
     @JoinTable
     private List<Menu> menus ;
     private float total ;
+    private int tableNo;
+    private LocalDateTime dateTime ;
 }
