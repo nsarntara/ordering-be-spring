@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
     public  Menu findFirstBy();
+    public  Menu findFirstByName();
 }
 

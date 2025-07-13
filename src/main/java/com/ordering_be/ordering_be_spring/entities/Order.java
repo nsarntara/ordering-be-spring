@@ -11,10 +11,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
 
-    private float total;
+    public float total;
 
-    private int tableNo;
+    public int tableNo;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<MenuItem> Menu;
+    public List<MenuItem> menus;
 }
