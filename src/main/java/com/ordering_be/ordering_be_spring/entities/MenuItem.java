@@ -1,44 +1,55 @@
 package com.ordering_be.ordering_be_spring.entities;
 
-import com.ordering_be.ordering_be_spring.Models.NewMenuItemRequest;
-import com.ordering_be.ordering_be_spring.Repository.MenuRepository;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.math.BigDecimal;
 
-
+/**
+ * Represents a single menu item that can be ordered (e.g., Pizza, Burger).
+ */
 @Entity
-@Table(name = "order_item")
-@NoArgsConstructor
-
-
 public class MenuItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private int quantity;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    private long menuId;
+    @Column(nullable = false)
+    private BigDecimal price;
 
-  //  private long orderId;
+    // Constructors
+    public MenuItem() {}
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-//    private Order order;
-//
-//
-//    @ManyToOne
-//    @JoinColumn(name = "menu_id")
-//    private Menu menu;
+    public MenuItem(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
 
-    @Autowired
-    private MenuRepository menuRepository;
-   public MenuItem(NewMenuItemRequest request){
-       this.quantity = request.quantity;
-       this.menuId = request.menuId;;
-      //menuRepository.findById(request.menuId);
-   }
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }

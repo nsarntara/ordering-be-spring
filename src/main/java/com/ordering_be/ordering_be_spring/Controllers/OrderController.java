@@ -1,11 +1,12 @@
 package com.ordering_be.ordering_be_spring.Controllers;
 
 import com.ordering_be.ordering_be_spring.Models.NewOrderRequest;
+import com.ordering_be.ordering_be_spring.Models.OrderItemRequest;
 import com.ordering_be.ordering_be_spring.Services.OrderService;
 import com.ordering_be.ordering_be_spring.entities.Order;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,25 @@ public class OrderController {
     @PostMapping
     public Order createOrder(@RequestBody NewOrderRequest newOrderRequest) {
         return orderService.createOrder(newOrderRequest);
+    }
+
+    /**
+     * Endpoint to get an order by its ID.
+     * HTTP GET /api/orders/{id}
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+        return orderService.getOrderById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Endpoint to get all orders.
+     * HTTP GET /api/orders
+     */
+    @GetMapping("/orders")
+    public List<Order> getAllOrders() {
+        return orderService.getAllOrders();
     }
 }
