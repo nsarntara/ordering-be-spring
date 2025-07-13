@@ -2,7 +2,6 @@ package com.ordering_be.ordering_be_spring.entities;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -11,10 +10,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
-    @OneToMany
-    @JoinTable
-    private List<Menu> menus ;
-    private float total ;
+
+    private float total;
+
     private int tableNo;
-    private LocalDateTime dateTime ;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<MenuItem> Menu;
 }
